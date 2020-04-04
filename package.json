@@ -1,0 +1,91 @@
+{
+  "name": "poem",
+  "productName": "poem",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "djodjo89",
+    "email": "mathysimion@yahoo.fr"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "poem"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./public/index.html",
+                  "js": "./src/App.tsx",
+                  "name": "main_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "6.0.0-beta.50",
+    "@electron-forge/maker-deb": "6.0.0-beta.50",
+    "@electron-forge/maker-rpm": "6.0.0-beta.50",
+    "@electron-forge/maker-squirrel": "6.0.0-beta.50",
+    "@electron-forge/maker-zip": "6.0.0-beta.50",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.50",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "css-loader": "^3.0.0",
+    "electron": "8.1.1",
+    "fork-ts-checker-webpack-plugin": "^4.1.0",
+    "node-loader": "^0.6.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
+    "@types/react-resizable": "^1.7.2",
+    "@types/styled-components": "^5.0.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "react-draggable": "^4.2.0",
+    "react-resizable": "^1.10.1",
+    "styled-components": "^5.0.1"
+  }
+}
