@@ -3,6 +3,9 @@ import * as ReactDOM from 'react-dom';
 import { GlobalComponent } from './components/GlobalComponent';
 import { Container, createMuiTheme, CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { blue, pink } from '@material-ui/core/colors';
+import { AppContextInterface, AppContextProvider } from './AppContext';
+import { Cypherer } from './model/Chypherer';
+import { Mapping } from './model/Mapping';
 
 const theme = createMuiTheme({
   palette: {
@@ -17,6 +20,11 @@ const theme = createMuiTheme({
   },
 });
 
+const appContext: AppContextInterface = {
+  poems: new Map(),
+  cypherer: new Cypherer(new Mapping()),
+};
+
 ReactDOM.render(
   <Container
     style={{
@@ -26,7 +34,9 @@ ReactDOM.render(
   >
     <MuiThemeProvider theme={theme}>
       <CssBaseline/>
-      <GlobalComponent/>
+      <AppContextProvider value={appContext}>
+        <GlobalComponent/>
+      </AppContextProvider>
     </MuiThemeProvider>
   </Container>,
     document.getElementById('root')

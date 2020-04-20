@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import SaveIcon from '@material-ui/icons/Save';
 import { Button } from '@material-ui/core';
 import * as electron from 'electron';
@@ -26,6 +26,9 @@ export const SaveButton: React.FC<SaveButtonProps> = (props: SaveButtonProps) =>
       size={'large'}
       startIcon={<SaveIcon />}
       onClick={save}
+      style={{
+        backgroundColor: 'blue'
+      }}
     >
       {props.children}
     </Button>

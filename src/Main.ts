@@ -1,4 +1,7 @@
 import { app, BrowserWindow } from 'electron';
+import Electron from 'electron';
+import Menu = Electron.Menu;
+import MenuItem = Electron.MenuItem;
 declare var MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -26,7 +29,7 @@ const createWindow = () => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {

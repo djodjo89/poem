@@ -12,9 +12,8 @@ export const PoemTitle = (props: PoemTitleProps) =>
     autoFocus
     style={{
       fontSize: '2.9em',
-      color: '#3f3e59',
+      color: '#ffffff',
     }}
-    color={'primary'}
     placeholder={props.placeholder}
     onChange={props.onChange}
     value={props.value}

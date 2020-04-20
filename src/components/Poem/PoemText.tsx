@@ -8,17 +8,15 @@ interface PoemTextProps {
   value: string,
 }
 
-export const PoemText = styled((props: PoemTextProps) => (
+export const PoemText = (props: PoemTextProps) => (
   <InputBase
     placeholder={props.placeholder}
     style={{
-      color: '#3f3e59',
+      color: '#ffffff',
+      width: '100%',
     }}
     multiline
     rows={10}
     value={props.value}
     onChange={props.onChange}/>
-))`
-    width: 100%;
-    height: 100%;
-`;
+);
