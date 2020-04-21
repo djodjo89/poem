@@ -1,5 +1,5 @@
 import { Keys } from './Keys';
-import mappingJson from '../../mapping.json';
+import { mappingJson } from '../Main';
 
 export class Mapping {
   private readonly _keys: Keys;
