@@ -7,6 +7,10 @@ module.exports = {
    */
   entry: './src/Main.ts',
   // Put your normal webpack config below here
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
   module: {
     rules: require('./webpack.rules')
   },

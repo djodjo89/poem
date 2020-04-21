@@ -1,7 +1,6 @@
 import { app, BrowserWindow } from 'electron';
-import Electron from 'electron';
-import Menu = Electron.Menu;
-import MenuItem = Electron.MenuItem;
+import fs from "fs";
+import * as path from 'path';
 declare var MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -22,14 +21,22 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      webSecurity: false,
     }
   });
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
+ /* mainWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }));*/
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -38,6 +45,16 @@ const createWindow = () => {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  mainWindow.webContents.executeJavaScript(`
+    const path = require('path');
+    module.paths.push(path.resolve('node_modules'));
+    module.paths.push(path.resolve('../node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'electron', 'node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'electron.asar', 'node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'app', 'node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'app.asar', 'node_modules'));
+  `);
 };
 
 // This method will be called when Electron has finished
@@ -61,3 +78,9 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+module.paths.push(path.resolve('node_modules'));
+module.paths.push(path.resolve('../node_modules'));
+module.paths.push(path.resolve(__dirname, '..', '..', '..', '..', 'resources', 'app', 'node_modules'));
+module.paths.push(path.resolve(__dirname, '..', '..', '..', '..', 'resources', 'app.asar', 'node_modules'));
+export const mappingJson = JSON.parse(fs.readFileSync(`${__dirname}/alphabet.json`).toString());

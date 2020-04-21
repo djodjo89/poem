@@ -11,6 +11,42 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
+  "build": {
+    "appId": "poem",
+    "extraResources": {
+      "filter": [
+        "./mapping.json"
+      ]
+    },
+    "mac": {
+      "category": "public.app-category.tools",
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "category": "Office",
+      "desktop": {
+        "Comment": "Application permettant d'écrire des poèmes en amphi discrètement",
+        "Name": "Poème",
+        "StartupNotify": "true",
+        "Terminal": "false",
+        "Type": "Application",
+        "Categories": "Office;"
+      },
+      "executableName": "poem",
+      "maintainer": "mathysimion@yahoo.fr",
+      "target": [
+        "AppImage"
+      ]
+    },
+    "win": {
+      "asar": false,
+      "target": [
+        "nsis"
+      ]
+    }
+  },
   "keywords": [],
   "author": {
     "name": "djodjo89",
@@ -35,10 +71,6 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
           "config": {}
         }
       ],
@@ -70,8 +102,10 @@
     "@electron-forge/maker-zip": "6.0.0-beta.50",
     "@electron-forge/plugin-webpack": "6.0.0-beta.50",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.0.0",
-    "electron": "8.1.1",
+    "electron": "^8.2.3",
+    "electron-builder": "^22.5.1",
     "fork-ts-checker-webpack-plugin": "^4.1.0",
     "node-loader": "^0.6.0",
     "style-loader": "^0.23.1",
@@ -86,6 +120,7 @@
     "@types/styled-components": "^5.0.1",
     "color": "^3.1.2",
     "electron-squirrel-startup": "^1.0.0",
+    "global": "^4.4.0",
     "randomcolor": "^0.5.4",
     "react-draggable": "^4.2.0",
     "react-resizer-component": "^3.2.0",
