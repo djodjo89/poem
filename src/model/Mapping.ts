@@ -1,5 +1,8 @@
 import { Keys } from './Keys';
-import { mappingJson } from '../Main';
+import fs from 'fs';
+import os from 'os';
+
+const mappingJson = JSON.parse(fs.readFileSync(`${os.homedir()}/Documents/poem/alphabet.json`).toString());
 
 export class Mapping {
   private readonly _keys: Keys;
