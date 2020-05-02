@@ -8,13 +8,13 @@ interface PoemTitleProps {
 }
 
 export const PoemTitle = (props: PoemTitleProps) =>
-  (<InputBase
+  <InputBase
     autoFocus
     style={{
-      fontSize: '2.9em',
       color: '#ffffff',
+      width: '15em',
     }}
     placeholder={props.placeholder}
     onChange={props.onChange}
     value={props.value}
-  />);
+  />;

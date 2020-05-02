@@ -59,7 +59,7 @@ export const Postit: React.FC<PostitProps> = (props: PostitProps) => (
               cursor: 'move',
             }}
           >
-            Poème {props.id + 1}
+            {props.id + 1}
           </div>
         </strong>
         <Poem

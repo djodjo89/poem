@@ -6,6 +6,7 @@ import { blue, pink } from '@material-ui/core/colors';
 import { AppContextInterface, AppContextProvider } from './AppContext';
 import { Cypherer } from './model/Chypherer';
 import { Mapping } from './model/Mapping';
+import AlphabetEditor from './components/AlphabetEditor/AlphabetEditor';
 
 const theme = createMuiTheme({
   palette: {
