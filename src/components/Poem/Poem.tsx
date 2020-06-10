@@ -5,7 +5,6 @@ import { PoemText } from './PoemText';
 import { SaveButton } from '../SaveButton';
 import { DeleteButton } from '../DeleteButton';
 import { AppContextConsumer } from '../../AppContext';
-import app = Electron.app;
 
 interface PoemProps {
   id: number,

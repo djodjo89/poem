@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { InputBase } from '@material-ui/core';
 
 interface PoemTextProps {
@@ -14,6 +13,7 @@ export const PoemText = (props: PoemTextProps) => (
     style={{
       color: '#ffffff',
       width: '100%',
+      marginLeft: '5px',
     }}
     multiline
     rows={10}

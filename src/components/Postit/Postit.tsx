@@ -30,7 +30,8 @@ export const Postit: React.FC<PostitProps> = (props: PostitProps) => (
       style={{
         zIndex: (props.firstPlan ? 1 : 0),
         backgroundColor: props.colors[0],
-        borderRadius: '3px',
+        borderRadius: '10px',
+        boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)',
       }}
       onFocus={() => props.toFirstPlan(props.id)}
       onClick={() => props.toFirstPlan(props.id)}
@@ -39,8 +40,9 @@ export const Postit: React.FC<PostitProps> = (props: PostitProps) => (
       }}
     >
       <Layout
-        width={550}
+        width={450}
         height={370}
+        overflow={''}
       >
         <strong
           className={'cursor'}
@@ -57,6 +59,7 @@ export const Postit: React.FC<PostitProps> = (props: PostitProps) => (
               fontSize: '2em',
               fontWeight: 'normal',
               cursor: 'move',
+              borderRadius: '10px 10px 0 0',
             }}
           >
             {props.id + 1}
