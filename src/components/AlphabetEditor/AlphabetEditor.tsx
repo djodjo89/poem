@@ -86,6 +86,8 @@ export default function AlphabetEditor(props: AlphabetEditorProps) {
         height: '100%',
         backgroundColor: 'rgba(0,0,0,0.3)',
         color: 'black',
+        backgroundImage: "url('logo-poem.jpg')",
+
         padding: '5%',
       }}
     >
