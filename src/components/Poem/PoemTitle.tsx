@@ -13,6 +13,8 @@ export const PoemTitle = (props: PoemTitleProps) =>
     style={{
       color: '#ffffff',
       width: '15em',
+      textAlign: 'left',
+      marginLeft: '5px',
     }}
     placeholder={props.placeholder}
     onChange={props.onChange}

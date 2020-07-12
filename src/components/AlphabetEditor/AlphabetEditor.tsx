@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Entry from './Entry';
 import { Button } from '@material-ui/core';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertResult } from 'sweetalert2';
 import './AlphabetEditor.css';
+import fs from 'fs';
+import Grid from '@material-ui/core/Grid';
+import * as oo from 'json8';
 
-export default function AlphabetEditor() {
-  const [translations, setEntries] = useState<Map<string, string>>(new Map());
+interface AlphabetEditorProps {
+  alphabetPath: string
+}
+
+export default function AlphabetEditor(props: AlphabetEditorProps) {
+  const objToStrMap = (obj: any) => {
+    const strMap = new Map();
+    Object.keys(obj).map(entry => strMap.set(entry, obj[entry]));
+    return strMap;
+  };
+  const alphabet = () => objToStrMap(JSON.parse(fs.readFileSync(props.alphabetPath).toString()));
+
+  const [translations, setEntries] = useState<Map<string, string>>(alphabet());
+
   const addEntry = () => Swal.fire({
     title: 'Ajouter une lettre à l\'alphabet',
     icon: 'question',
@@ -29,7 +44,7 @@ export default function AlphabetEditor() {
       const input1: any = document.getElementById('swal-input1');
       input1.focus();
     }
-  }).then(result => {
+  }).then((result: SweetAlertResult) => {
     const copy: Map<string, string> = new Map(translations);
     copy.set(result.value[0], result.value[1]);
     setEntries(copy);
@@ -42,66 +57,120 @@ export default function AlphabetEditor() {
       title: 'Traduction supprimée !',
     });
   };
-
-  useEffect(() => console.log(translations));
+  const save = async () => {
+    console.log('Save', translations);
+    console.log('JSON', JSON.stringify(translations));
+    try {
+      const file = oo.serialize(translations);
+      await fs.promises.writeFile(props.alphabetPath, file);
+    } catch(e) {
+      console.log('Error', e);
+      Swal.fire({
+        title: 'Crotte de bique, ça a foiré',
+        icon: 'error',
+        text: 'Il doit y avoir une erreur avec l\'alphabet, essaie d\'y jeter un coup d\'oeil',
+      });
+    }
+    Swal.fire({
+      title: 'Ça alors, ça fonctionne !',
+      icon: 'success',
+      text: 'Tout roule, désormais tu peux utiliser ton nouvel alphabet',
+    })
+  };
 
   return (
-    <div
+    <Grid
       style={{
         position: 'absolute',
         width: '100%',
         height: '100%',
         backgroundColor: 'rgba(0,0,0,0.3)',
         color: 'black',
+        backgroundImage: "url('logo-poem.jpg')",
+
+        padding: '5%',
       }}
     >
-      <div
+      <Grid
+        container
+        item
+        xs={12}
+        sm={10}
+        md={10}
+        lg={6}
+        justify={'center'}
         style={{
           borderRadius: '20px',
           backgroundColor: 'white',
-          width: '80%',
-          height: '80%',
           margin: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
         }}
       >
         <h1 style={{ textAlign: 'center' }}>Editeur d'alphabet</h1>
-        {(() => [...translations.entries()].map((entry, index) =>
-          translations.size !== 0
-            ? <Entry key={index} origin={entry[0]} translation={entry[1]} delete={() => deleteEntry(entry[0])} updateTranslation={e => {
-              const value: string = e.target.value;
-              if (value.length === 1 && value !== entry[1]) {
+        <Grid
+          container
+          item
+          justify={'center'}
+        >
+          {(() => [...translations.entries()].map((entry, index) =>
+            translations.size !== 0
+              ? <Entry key={index} origin={entry[0]} translation={entry[1]} delete={() => deleteEntry(entry[0])} updateTranslation={e => {
+                const value: string = e.target.value;
                 const copy: Map<string, string> = new Map(translations);
-                const copySize: number = copy.size;
+                console.log('Value', value);
                 copy.set(entry[0], value);
-                const newCopySize: number = copy.size;
-                if (copySize === newCopySize) {
-                  Swal.fire({
-                    title: 'Désolé, ça n\'a pas marché : (',
-                    text: 'Cette lettre était déjà dans la liste',
-                    icon: 'warning',
-                  });
-                } else {
-                  setEntries(copy);
-                }
-              }
-            }} />
-            : <p>Tu n'as pas encore de traduction, n'hésite à tester des trucs !</p>
-        ))()}
-
-        <Button
-          onClick={addEntry}
+                console.log('Copy', copy);
+                setEntries(copy);
+              }} />
+              : <p>Tu n'as pas encore de traduction, n'hésite à tester des trucs !</p>
+          ))()}
+        </Grid>
+        <Grid
+          container
+          item
+          spacing={2}
+          direction={'row'}
+          justify={'center'}
+          alignItems={'center'}
           style={{
-            backgroundColor: '#3f3e59',
-            width: '50%',
-            marginRight: 'auto',
-            marginLeft: 'auto',
+            paddingBottom: '1em',
           }}
         >
-          Ajouter une traduction
-        </Button>
-      </div>
-    </div>
+          <Grid
+            item
+            container
+            xs={6}
+          >
+            <Button
+              onClick={addEntry}
+              style={{
+                backgroundColor: '#3f3e59',
+                width: '50%',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+              }}
+            >
+              Ajouter une traduction
+            </Button>
+          </Grid>
+          <Grid
+            item
+            container
+            xs={6}
+          >
+            <Button
+              onClick={save}
+              style={{
+                backgroundColor: '#3f3e59',
+                width: '50%',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+              }}
+            >
+              Sauvegarder
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   )
 }

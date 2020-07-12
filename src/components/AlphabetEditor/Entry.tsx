@@ -1,5 +1,8 @@
 import React from 'react';
 import { DeleteButton } from '../DeleteButton';
+import { Grid } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+import './Entry.css';
 
 interface EntryProps {
   origin: string,
@@ -10,18 +13,25 @@ interface EntryProps {
 
 export default function Entry(props: EntryProps) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        color: 'black',
-      }}
+    <Grid
+      container
+      item
+      style={{ color: 'black' }}
+      spacing={2}
+      xs={12}
+      justify={'center'}
+      alignItems={'center'}
     >
-      <div>
+      <Grid
+        item
+        xs={4}
+        style={{ textAlign: 'center' }}
+      >
         <p>{props.origin}</p>
-      </div>
-      <div
+      </Grid>
+      <Grid
+        item
+        xs={4}
         style={{
           height: '100%',
           display: 'flex',
@@ -29,9 +39,8 @@ export default function Entry(props: EntryProps) {
           flexDirection: 'column',
         }}
       >
-        <input
+        <TextField
           type={'text'}
-          maxLength={1}
           onChange={props.updateTranslation}
           value={props.translation}
           style={{
@@ -39,8 +48,10 @@ export default function Entry(props: EntryProps) {
             textAlign: 'center',
           }}
         />
-      </div>
-      <div
+      </Grid>
+      <Grid
+        item
+        xs={4}
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -57,7 +68,7 @@ export default function Entry(props: EntryProps) {
         >
           Supprimer
         </DeleteButton>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   )
 }

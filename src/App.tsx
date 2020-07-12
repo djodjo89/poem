@@ -1,12 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { GlobalComponent } from './components/GlobalComponent';
 import { Container, createMuiTheme, CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { blue, pink } from '@material-ui/core/colors';
 import { AppContextInterface, AppContextProvider } from './AppContext';
 import { Cypherer } from './model/Chypherer';
 import { Mapping } from './model/Mapping';
-import AlphabetEditor from './components/AlphabetEditor/AlphabetEditor';
+import GlobalContainer from './components/GlobalContainer';
 
 const theme = createMuiTheme({
   palette: {
@@ -36,7 +35,7 @@ ReactDOM.render(
     <MuiThemeProvider theme={theme}>
       <CssBaseline/>
       <AppContextProvider value={appContext}>
-        <GlobalComponent/>
+        <GlobalContainer/>
       </AppContextProvider>
     </MuiThemeProvider>
   </Container>,

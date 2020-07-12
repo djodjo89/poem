@@ -23,5 +23,12 @@ module.exports = [
         transpileOnly: true
       }
     }]
-  }
+  },
+  {
+    test: /\.(png|svg|jpe?g|jpeg|webp)$/,
+    loader: 'file-loader',
+    options: {
+      name: 'public/[name].[ext]',
+    }
+  },
 ];
