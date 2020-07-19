@@ -13,11 +13,20 @@ if (require('electron-squirrel-startup')) {
 let mainWindow: any;
 
 const createWindow = () => {
+  let titleBarStyle: "default" | "hidden" | "hiddenInset" | "customButtonsOnHover" | undefined = 'default';
+  let frame = true;
+  if (process.platform !== 'darwin') {
+    frame = false;
+  } else {
+    titleBarStyle = 'hidden';
+  }
   // Create the browser window.
   mainWindow = new BrowserWindow({
     resizable: true,
     width: 800,
     height: 600,
+    frame,
+    titleBarStyle,
     webPreferences: {
       nodeIntegration: true,
     }

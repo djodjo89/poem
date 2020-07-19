@@ -58,13 +58,10 @@ export default function AlphabetEditor(props: AlphabetEditorProps) {
     });
   };
   const save = async () => {
-    console.log('Save', translations);
-    console.log('JSON', JSON.stringify(translations));
     try {
       const file = oo.serialize(translations);
       await fs.promises.writeFile(props.alphabetPath, file);
     } catch(e) {
-      console.log('Error', e);
       Swal.fire({
         title: 'Crotte de bique, ça a foiré',
         icon: 'error',
@@ -86,8 +83,6 @@ export default function AlphabetEditor(props: AlphabetEditorProps) {
         height: '100%',
         backgroundColor: 'rgba(0,0,0,0.3)',
         color: 'black',
-        backgroundImage: "url('logo-poem.jpg')",
-
         padding: '5%',
       }}
     >
@@ -116,9 +111,7 @@ export default function AlphabetEditor(props: AlphabetEditorProps) {
               ? <Entry key={index} origin={entry[0]} translation={entry[1]} delete={() => deleteEntry(entry[0])} updateTranslation={e => {
                 const value: string = e.target.value;
                 const copy: Map<string, string> = new Map(translations);
-                console.log('Value', value);
                 copy.set(entry[0], value);
-                console.log('Copy', copy);
                 setEntries(copy);
               }} />
               : <p>Tu n'as pas encore de traduction, n'hésite à tester des trucs !</p>

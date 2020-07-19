@@ -1,11 +1,10 @@
-import Button from '@material-ui/core/Button'
-import AlphabetEditor from './AlphabetEditor/AlphabetEditor'
-import { GlobalComponent } from './GlobalComponent'
-import React, { useState } from 'react'
-import logoSrc from './logo-poem.svg';
+import Button from '@material-ui/core/Button';
+import AlphabetEditor from './AlphabetEditor/AlphabetEditor';
+import { GlobalComponent } from './GlobalComponent';
+import React, { useState } from 'react';
+import logoSrc from '../../static/images/logo-poem.svg';
 
 export default function GlobalContainer() {
-
   const [alphabetEditorOpened, setAlphabetEditorState] = useState(false)
 
   const toggleAlphabetEditor = () =>

@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@material-ui/core';
 import { Poem } from '../Poem/Poem';
 import Draggable from 'react-draggable';
-import Layout from 'react-resizer-component';
 
 interface PostitProps {
   id: number,
@@ -39,11 +38,6 @@ export const Postit: React.FC<PostitProps> = (props: PostitProps) => (
         position: 'absolute',
       }}
     >
-      <Layout
-        width={450}
-        height={370}
-        overflow={''}
-      >
         <strong
           className={'cursor'}
           style={{
@@ -71,7 +65,6 @@ export const Postit: React.FC<PostitProps> = (props: PostitProps) => (
           poemPlaceholder={props.poemPlaceholder}
           onDelete={() => props.deletePostit(props.id)}
         />
-      </Layout>
     </Box>
   </Draggable>
 );

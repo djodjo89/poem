@@ -9,6 +9,8 @@ import { AppContext } from '../AppContext';
 import * as electron from "electron";
 import OpenDialogReturnValue = Electron.OpenDialogReturnValue;
 import fs from "fs";
+import { Color, Titlebar } from 'custom-electron-titlebar';
+import icon from '../../static/images/logo-poem.svg';
 
 interface GlobalComponentState {
   postits: PostitModel[];
@@ -35,7 +37,7 @@ export class GlobalComponent extends React.PureComponent<any, GlobalComponentSta
 
     this.colorGenerator = new ColorGenerator(['#ffffff', '#3f3e59']);
 
-    const sendEvent = () =>
+    const saveAs = () =>
       electron.remote.dialog.showOpenDialog({
         properties: [
           'openDirectory',
@@ -57,10 +59,10 @@ export class GlobalComponent extends React.PureComponent<any, GlobalComponentSta
           // {label: 'New', click: sendEvent('file-new')},
           // {label: 'Open', click: OpenFile},
           // {label: 'Save', click: sendEvent('file-save')},
-          {label: 'Sauvergarder sous', click: () => sendEvent()},
+          {label: 'Sauvergarder sous', click: () => saveAs()},
           // {label: 'Close', click: sendEvent('file-close')},
           // {type: 'separator'},
-          // {label: 'Quit', click: () => remote.app.quit()}
+          {label: 'Fermer', click: () => remote.app.quit()}
         ],
       };
 
@@ -70,7 +72,12 @@ export class GlobalComponent extends React.PureComponent<any, GlobalComponentSta
     ];
 
     const menu: any = remote.Menu.buildFromTemplate(template);
-    remote.Menu.setApplicationMenu(menu);
+
+    new Titlebar({
+      backgroundColor: Color.fromHex('#3f3e59'),
+      icon,
+      menu,
+    });
   }
 
 

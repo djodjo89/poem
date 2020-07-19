@@ -25,7 +25,7 @@ module.exports = [
     }]
   },
   {
-    test: /\.(png|svg|jpe?g|jpeg|webp)$/,
+    test: /\.(?:png|svg|jpe?g|webp)$/,
     loader: 'file-loader',
     options: {
       name: 'public/[name].[ext]',

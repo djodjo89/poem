@@ -12,7 +12,7 @@ export const PoemText = (props: PoemTextProps) => (
     placeholder={props.placeholder}
     style={{
       color: '#ffffff',
-      width: '100%',
+      width: '99%',
       marginLeft: '5px',
     }}
     multiline
