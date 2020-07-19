@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@material-ui/core';
 import { Poem } from '../Poem/Poem';
 import Draggable from 'react-draggable';
+import { Resizable } from 're-resizable';
 
 interface PostitProps {
   id: number,
@@ -18,7 +19,7 @@ interface PostitProps {
 
 export const Postit: React.FC<PostitProps> = (props: PostitProps) => (
   <Draggable
-    handle={'strong'}
+    handle={'.box'}
     defaultPosition={{x: props.x, y: props.y}}
     onDrag={() => props.toFirstPlan(props.id)}
   >
@@ -38,33 +39,19 @@ export const Postit: React.FC<PostitProps> = (props: PostitProps) => (
         position: 'absolute',
       }}
     >
-        <strong
-          className={'cursor'}
-          style={{
-            userSelect: 'none',
-          }}
-          onClick={() => props.toFirstPlan(props.id)}
-          onFocus={() => props.toFirstPlan(props.id)}
-        >
-          <div
-            style={{
-              backgroundColor: props.colors[1],
-              textAlign: 'center',
-              fontSize: '2em',
-              fontWeight: 'normal',
-              cursor: 'move',
-              borderRadius: '10px 10px 0 0',
-            }}
-          >
-            {props.id + 1}
-          </div>
-        </strong>
+      <Resizable
+        defaultSize={{
+          width: 450,
+          height: 400,
+        }}
+      >
         <Poem
           id={props.id}
           titlePlaceholder={props.titlePlaceholder}
           poemPlaceholder={props.poemPlaceholder}
           onDelete={() => props.deletePostit(props.id)}
         />
+      </Resizable>
     </Box>
   </Draggable>
 );

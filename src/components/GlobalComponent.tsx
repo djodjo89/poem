@@ -20,7 +20,7 @@ interface GlobalComponentState {
 }
 
 export class GlobalComponent extends React.PureComponent<any, GlobalComponentState> {
-  private poemPlaceholder: string = 'Texte';
+  private poemPlaceholder: string = 'A toi de jouer !';
   private titlePlaceholder: string = 'Titre';
   private colorGenerator: ColorGenerator;
   static contextType = AppContext;

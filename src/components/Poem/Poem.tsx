@@ -41,7 +41,11 @@ export class Poem extends React.PureComponent<PoemProps, PoemState> {
 
           return (
             <article>
-              <header>
+              <header
+                style={{
+                  textAlign: 'center',
+                }}
+              >
                 <PoemTitle
                   onChange={(event: any) => this.setState({ title: appContext.cypherer.obfuscate(event.target.value) })}
                   placeholder={this.props.titlePlaceholder}
